@@ -133,7 +133,6 @@ def post_edit(request, post_id):
     post_det = Post.objects.select_related(
         'group').get(pk=post_id)
 
-    username = request.user.username
     user = request.user
 
     if request.user.is_authenticated and post_det.author == user:
