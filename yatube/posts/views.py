@@ -1,6 +1,5 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
-from datetime import datetime, date
 
 from .models import Post, Group, User
 from .constants import POSTS_INDEX_LIM, POSTS_GROUP_POSTS_LIM, \
@@ -46,8 +45,6 @@ def group_posts(request, slug):
 
 
 def profile(request, username):
-    # Здесь код запроса к модели и создание словаря контекста
-    #user = User.objects.filter(username=username)[:1]
     user = get_object_or_404(User, username=username)
     posts = Post.objects.select_related(
         'author').filter(author=user)
@@ -145,11 +142,8 @@ def post_edit(request, post_id):
 
             form = PostForm(request.POST, instance=post_det)
 
-            # Если все данные формы валидны - работаем с "очищенными данными" формы
             if form.is_valid():
-                # Берём валидированные данные формы из словаря form.cleaned_data
                 form.author = user
-                author = username
                 form.save()
                 return redirect('/posts/%s/' % post_id)
 
@@ -160,8 +154,6 @@ def post_edit(request, post_id):
             }
             return render(request, 'posts/create_post.html', context)
 
-            # Если пришёл не POST-запрос - создаём и передаём в шаблон пустую форму
-            # пусть пользователь напишет что-нибудь
         form = PostForm(instance=post_det)
 
         is_edit = True

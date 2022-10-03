@@ -8,6 +8,7 @@ class Group(models.Model):
     title = models.CharField("Group's title", max_length=200)
     slug = models.SlugField("Group's slug", unique=True)
     description = models.TextField("Group's description")
+
     class Meta:
         verbose_name = "Group"
         verbose_name_plural = "Groups"
