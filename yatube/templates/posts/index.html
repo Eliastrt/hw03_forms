@@ -6,7 +6,7 @@
   <div class="container">
     <h1>Последние обновления на сайте</h1>
     {% for post in page_obj %}
-      {% include 'includes/block.html' %}
+      {% include 'posts/includes/block.html' %}
     {% if not forloop.last %}
       <hr>
     {% endif %}

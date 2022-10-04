@@ -15,10 +15,7 @@ class SignUp(CreateView):
 
 def user_contact(request):
     if request.method == 'POST':
-
         form = ContactForm(request.POST)
-
-        # Если все данные формы валидны - работаем с "очищенными данными" формы
         if form.is_valid():
 
             form.save()
@@ -28,4 +25,5 @@ def user_contact(request):
         return render(request, 'contact.html', {'form': form})
 
     form = ContactForm()
+
     return render(request, 'contact.html', {'form': form})

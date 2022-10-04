@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block head %}
-  <title> Пост {{ post_short }} </title>
+  <title> Пост {{ post_det.text|truncatechars:30 }} </title>
 {% endblock %}
 {% block content %}
   <div class="row">
@@ -10,7 +10,7 @@
               Дата публикации: {{ post_det.pub_date }}
             </li>
             <!-- если у поста есть группа -->
-            {% if post.group.id > 0 %}
+            {% if post.group %}
               <li class="list-group-item">
                 Группа: {{ post_det.group.title }}
                 <a href="{% url 'posts:group_list' post.group.slug %}">

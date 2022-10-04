@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+from .constants import POSTS_TEXT_LIM
+
+
 User = get_user_model()
 
 
@@ -43,4 +46,4 @@ class Post(models.Model):
         verbose_name_plural = "Posts"
 
     def __str__(self):
-        return self.text
+        return self.text[:POSTS_TEXT_LIM]

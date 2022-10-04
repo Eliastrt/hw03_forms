@@ -5,7 +5,6 @@ from .models import Post
 
 class PostForm(forms.ModelForm):
     class Meta:
-        # На основе какой модели создаётся класс формы
         model = Post
         fields = ('text', 'group')
 
@@ -16,6 +15,4 @@ class PostForm(forms.ModelForm):
             raise forms.ValidationError(
                 'Вы обязательно должны что-то написать!')
 
-        # Метод-валидатор обязательно должен вернуть очищенные данные,
-        # даже если не изменил их
         return data

@@ -5,9 +5,9 @@
 {% block content %}
   <div class="container">
     <h1>Все посты пользователя {{ author.get_full_name }} </h1>
-    <h3>Всего постов: {{ posts_cnt }} </h3>
+    <h3>Всего постов: {{ author.posts.count }} </h3>
     {% for post in page_obj %}
-      {% include 'includes/block.html' %}
+      {% include 'posts/includes/block.html' %}
     {% if not forloop.last %}
       <hr>
     {% endif %}
