@@ -83,8 +83,7 @@ def post_create(request):
 
 @login_required
 def post_edit(request, post_id):
-    post_det = Post.objects.select_related(
-        'group').get(pk=post_id)
+    post_det = get_object_or_404(Post, pk=post_id)
 
     form = PostForm(request.POST or None, instance=post_det)
 
@@ -92,17 +91,16 @@ def post_edit(request, post_id):
 
         return redirect('posts:post_detail', post_id=post_id)
 
-    elif form.is_valid():
+    if form.is_valid():
         form.author = request.user
         form.save()
 
         return redirect('posts:post_detail', post_id=post_id)
 
-    else:
-        is_edit = 'edit'
-        context = {
-            'form': form,
-            'is_edit': is_edit,
+    is_edit = 'edit'
+    context = {
+        'form': form,
+        'is_edit': is_edit,
         }
 
-        return render(request, 'posts/create_post.html', context)
+    return render(request, 'posts/create_post.html', context)

@@ -12,7 +12,7 @@
     </p>
     <a href="{% url 'posts:post_detail' post.id %}">подробно</a>
     <br>
-    {% if post.group %}
+    {% if not group and post.group.id > 0 %}
     <a href="{% url 'posts:group_list' post.group.slug %}">все записи
         группы {{ post.group.title }}</a>
     {% endif %}
