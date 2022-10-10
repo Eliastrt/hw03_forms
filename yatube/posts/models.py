@@ -16,14 +16,17 @@ class Group(models.Model):
         verbose_name = "Group"
         verbose_name_plural = "Groups"
         default_related_name = "group"
+        app_label = "posts"
 
     def __str__(self):
         return self.title
 
 
 class Post(models.Model):
-    text = models.TextField("Post's description")
-    pub_date = models.DateTimeField("Post's pub_date", auto_now_add=True)
+    text = models.TextField(verbose_name="Post's description",
+                            help_text='Введите текст поста')
+    pub_date = models.DateTimeField(verbose_name="Post's pub_date",
+                                    auto_now_add=True)
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
