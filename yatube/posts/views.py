@@ -63,7 +63,7 @@ def post_detail(request, post_id):
 
 @login_required
 def post_create(request):
-    s_edit = "create"
+    action = "create"
     form = PostForm(request.POST or None)
 
     if form.is_valid():
@@ -75,7 +75,7 @@ def post_create(request):
 
     context = {
         "form": form,
-        "s_edit": s_edit,
+        "action": action,
     }
 
     return render(request, "posts/create_post.html", context)
@@ -97,10 +97,10 @@ def post_edit(request, post_id):
 
         return redirect("posts:post_detail", post_id=post_id)
 
-    s_edit = "edit"
+    action = "edit"
     context = {
         "form": form,
-        "s_edit": s_edit,
+        "action": action,
     }
 
     return render(request, "posts/create_post.html", context)
