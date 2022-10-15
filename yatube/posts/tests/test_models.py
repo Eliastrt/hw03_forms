@@ -12,14 +12,14 @@ class PostModelTest(TestCase):
         super().setUpClass()
         cls.user = User.objects.create_user(username='auth')
         cls.group = Group.objects.create(
-            title='Тестовая группа',
-            slug='Тестовый слаг',
-            description='Тестовое описание',
+            title="Тестовая группа",
+            slug="Тестовый слаг",
+            description="Тестовое описание",
         )
 
         cls.post = Post.objects.create(
             author=cls.user,
-            text='Тестовый текст',
+            text="Тестовый текст.Тестовый текст.Тестовый текст.",
         )
 
     def test_models_have_correct_object_names(self):
@@ -28,7 +28,7 @@ class PostModelTest(TestCase):
         post = self.post
         group = self.group
         field_str = {
-            post.text[:16]: str(post),
+            post.text[:15]: str(post),
             group.title: str(group),
         }
         for expected_object_name, expected in field_str.items():
@@ -65,7 +65,7 @@ class PostModelTest(TestCase):
         """help_text в полях совпадает с ожидаемым."""
         post = PostModelTest.post
         field_help_texts = {
-            'text': 'Введите текст поста',
+            "text": "Введите текст поста",
         }
         for field, expected_value in field_help_texts.items():
             with self.subTest(field=field):
